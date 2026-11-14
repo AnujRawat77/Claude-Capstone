@@ -1,6 +1,6 @@
 # Requirements
 
-Status: **Approved** — 2026-11-11.
+Status: **Approved** — 2026-11-11. **Baseline clarifications C-4 and C-5 approved and incorporated** — 2026-11-12.
 
 ---
 
@@ -251,13 +251,13 @@ No unresolved open questions remain. All four original open questions (OQ-001 th
 |---|---|
 | AC-FR-001a | Given valid inputs (positive amount, valid `ExpenseCategory`, optional date/description), `addExpense()` stores a new `EXPENSE` transaction; retrieving it by ID returns all fields intact including assigned category enum. |
 | AC-FR-001b | Given a zero or negative amount, `addExpense()` rejects the input with an error message; no transaction is stored; total transaction count is unchanged. |
-| AC-FR-001c | Given a blank or invalid date string (non-`yyyy-MM-dd`), `addExpense()` rejects the input with an error message; no transaction is stored. |
+| AC-FR-001c | A blank date defaults to the current date (`LocalDate.now()`). Malformed or impossible date values (e.g., `2026-1-5`, `2026-02-30`, or non-`yyyy-MM-dd` format) are rejected with an error message; no transaction is stored. **[C-4 — Clarified 2026-11-12: blank date defaults to today; malformed/impossible dates rejected.]** |
 | AC-FR-002a | Given valid inputs (positive amount, valid `IncomeCategory`, optional date/description), `addIncome()` stores a new `INCOME` transaction; retrieving it by ID returns all fields intact. |
 | AC-FR-002b | Given a zero or negative amount, `addIncome()` rejects the input with an error message; no transaction is stored. |
 | AC-FR-003a | `listAll()` returns every transaction in the store in insertion order; count matches total adds minus deletes. |
 | AC-FR-003b | `listByCategory("FOOD")` (case-insensitive) returns only transactions whose category name equals `FOOD`; transactions of other categories are excluded. |
 | AC-FR-003c | `listByDateRange(start, end)` returns only transactions where `start <= date <= end` inclusive; a transaction dated exactly on `start` and one dated exactly on `end` are both included. |
-| AC-FR-003d | `listByDateRange(end, start)` where `start > end` displays an error and returns an empty result without crashing. |
+| AC-FR-003d | `listByDateRange(start, end)` where `start > end` throws `ValidationException`; the console catches it and displays the error message. No transactions are returned and the store is unchanged. |
 | AC-FR-004a | Given an existing transaction ID and a new valid amount, `editTransaction()` updates the amount; all other fields remain unchanged. |
 | AC-FR-004b | Given an existing transaction ID and a type change from `EXPENSE` to `INCOME`, `editTransaction()` updates the type; the category is updated to a valid `IncomeCategory`; the transaction is no longer counted in expense summaries. |
 | AC-FR-004c | Given a non-existent ID, `editTransaction()` displays an error; the store is unchanged. |
@@ -265,7 +265,7 @@ No unresolved open questions remain. All four original open questions (OQ-001 th
 | AC-FR-005b | Given an existing ID and confirmation "n", `deleteTransaction()` aborts; the transaction remains in the store. |
 | AC-FR-005c | Given a non-existent ID, `deleteTransaction()` displays an error; the store is unchanged. |
 | AC-FR-006a | `getCategorySpendingSummary()` returns entries sorted by total spend descending; each entry contains the category name, total `BigDecimal`, and percentage rounded to 2 decimal places; categories with zero spend are absent. |
-| AC-FR-006b | The sum of all percentages in the spending summary equals 100.00 (within ±0.01 rounding tolerance). |
+| AC-FR-006b | Each category percentage is rounded to 2 decimal places using `RoundingMode.HALF_UP`, calculated independently per category. The sum of all displayed percentages differs from 100.00 by no more than ±0.005 multiplied by the number of displayed category rows (n). |
 | AC-FR-007a | `getBalanceSummary()` returns totalIncome, totalExpenses, and netBalance where netBalance = totalIncome − totalExpenses, all computed with `BigDecimal` arithmetic. |
 | AC-FR-007b | With no transactions, all three values are `BigDecimal.ZERO`. |
 | AC-FR-008a | `setBudget(FOOD, 2024, 11, new BigDecimal("500"))` stores the budget; `getBudget(FOOD, 2024, 11)` returns `500`. |
@@ -284,7 +284,7 @@ No unresolved open questions remain. All four original open questions (OQ-001 th
 |---|---|
 | AC-NFR-001 | A source scan of all `src/main` Java files finds zero occurrences of `double`, `float`, `Double`, or `Float` used for monetary values or arithmetic. |
 | AC-NFR-002 | A source scan of all `src/main` Java files finds zero occurrences of `java.util.Date` or `java.util.Calendar`. |
-| AC-NFR-003 | A source scan of all `src/main` Java files finds zero `import java.io.*`, `import java.nio.*`, `import java.sql.*`, or HTTP-client imports. |
+| AC-NFR-003 | All data resides in JVM heap collections; file I/O (`java.io.*`, `java.nio.*`), database access (`java.sql.*`), and network calls are prohibited in `src/main`. Console I/O using `java.util.Scanner`, `System.in`, and `System.out` (standard streams) is explicitly permitted in the console layer. **[C-5 — Clarified 2026-11-12: prohibit file, network, and database I/O; explicitly permit console I/O via standard streams.]** |
 | AC-NFR-004 | A source scan of all `src/main` Java files finds zero imports of GUI, logging, or external I/O libraries. |
 | AC-NFR-005 | Running `mvn test` from the project root completes with `BUILD SUCCESS` and zero test failures. |
 | AC-NFR-006 | The test source tree contains only TestNG annotations (`@Test`, `@BeforeMethod`, etc.); no JUnit imports are present. |
