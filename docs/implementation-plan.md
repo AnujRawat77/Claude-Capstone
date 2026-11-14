@@ -568,6 +568,9 @@ No requirements or architecture gap blocks planning. D-1 and D-2 (resolved durin
 | User-story coverage | US-001 to US-010 mapped one-to-one to FR-001 to FR-010; draft story document is supplementary and does not add acceptance criteria |
 | User-story approval status | `docs/user-stories.md` remains **DRAFT — awaiting separate human review/approval** |
 | Stage 3 status | **Approved** by the human on 2026-11-12; corrected design-review and architecture records are reflected in the baseline |
-| Build / tests run by the planner | **None.** No source, test, or `pom.xml` file was created or modified |
+| Build / tests run by the planner | **None.** No source, test, or `pom.xml` file was created or modified by the planner. Source code created by Java Developer post-planning and approved by human on 2026-11-14. |
 | Human approval of this plan | **APPROVED by the human on 2026-11-12.** Stage 4 — Implementation Planning is approved. All 20 tasks, traceability matrices, and planning decisions are authorized. |
-| Implementation authorized | **Planning authorized.** Application implementation (Stage 5) requires separate explicit human approval before any code changes begin. |
+| Implementation authorized | **AUTHORIZED by the human on 2026-11-14.** Stage 5 — Application Implementation approved. Initial source code (exceptions, models, CategoryTest) reviewed and approved. Implementation work (IMP-001 through IMP-020) may proceed. |
+| Implementation task execution | **IMP-001 through IMP-020 completed on 2026-11-14**; implementation and task-level tests are recorded in `docs/changelog.md`. |
+| Implementation verification evidence | `mvn clean test`: BUILD SUCCESS, 110 tests, 0 failures, 0 errors, 0 skipped. The warning-enabled compile and source-compliance checks also passed; see the dated activity-log entry. |
+| Subsequent approval gates | Stage 6 independent whole-project code review and Stage 7 independent verification remain pending. Stage 5 completion does not approve either stage or authorize a commit, push, or PR. |

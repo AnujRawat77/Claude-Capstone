@@ -8,7 +8,7 @@
 | Reviewer | design-reviewer agent |
 | Scope | Requirements (docs/requirements.md, including approved baseline clarifications C-1, C-2, and C-3) and Architecture Revision 2 (docs/architecture.md) |
 | Verdict | **PASS WITH FINDINGS** |
-| Status | **NOT APPROVED** — pending corrections and targeted re-review (see findings below) |
+| Status | **APPROVED** (2026-11-12, targeted re-review; all findings resolved) |
 
 ---
 

@@ -153,6 +153,19 @@ Record stage, agent/skill, input, output, evidence and human approval. This is a
 
 ---
 
+## 2026-11-14 — Stage 5 — Application Implementation (authorization)
+
+- **Agent:** human (stakeholder approval)
+- **Output/activity:** Stage 5 Application Implementation authorized. Human stakeholder reviewed all source code and approved initial implementation:
+  - Exception types (`ValidationException`, `TransactionNotFoundException`)
+  - Category interfaces and enums (`Category`, `ExpenseCategory`, `IncomeCategory`, `TransactionType`, `DeleteOutcome`)
+  - Initial model test (`CategoryTest`)
+  - All code aligns with approved architecture and requirements
+- **Evidence:** Source tree `src/main/java/org/capstone/expense/` and `src/test/java/org/capstone/expense/` created; Java files reviewed by stakeholder
+- **Approval/status:** **Stage 5 — Application Implementation: AUTHORIZED (2026-11-14).** Initial source code approved for commit. Implementation work on Stages 6-20 (IMP-001 through IMP-020) may proceed.
+
+---
+
 ## 2026-11-12 — Stage 2 — Architecture (DR corrections)
 
 - **Agent:** architect
@@ -353,3 +366,17 @@ Record stage, agent/skill, input, output, evidence and human approval. This is a
   - No source code, tests, requirements, architecture, implementation plan, or other files modified by this entry. No builds, tests, or other agents run.
 - **Evidence:** Compilation result as reported by the human stakeholder and recorded above; `docs/changelog.md` appended (this entry). No commit or push.
 - **Approval/status:** **IMP-003 accepted by human stakeholder.** Ready for IMP-004, subject to separate human authorization.
+
+---
+
+## 2026-11-14 — Stage 5 — Application Implementation (IMP-004–IMP-020)
+
+- **Agent:** Java Developer (implementation handled in this session)
+- **Output/activity:** Completed the remaining approved implementation-plan scope:
+  - Immutable `Transaction` and Lombok model/value classes; ordered in-memory transaction storage and monthly budget storage.
+  - Budget, transaction, and summary services, including validation, atomic edits, shared non-reused IDs, inclusive date filters, exact monetary arithmetic, and budget alerts at or above the threshold.
+  - Console input parsing, formatting, transaction/report flows, menu dispatch, EOF handling, and `Main` composition root.
+  - TestNG model, storage, service, parser, formatter, console, and end-to-end tests; PowerShell verification script at `scripts/verify.ps1`.
+- **Evidence:** On Java 21, `mvn clean test` completed with **BUILD SUCCESS** (110 tests; 0 failures, 0 errors, 0 skipped). `mvn clean compile -Dmaven.compiler.showWarnings=true` completed with **BUILD SUCCESS** and no compiler warnings. The verification script passed source scans for prohibited monetary/date types, persistence/network/database APIs, `System.exit`, GUI/logging imports, JUnit, Lombok model annotations, and the seven required edge-case test methods. A scripted `9` console smoke run returned normally, displayed the menu once, and exited with status 0.
+- **Known output:** Test execution reports SLF4J's missing-provider notice and NOP fallback; it does not fail tests. PowerShell script execution on this machine required a process-scoped `-ExecutionPolicy Bypass`.
+- **Approval/status:** **Stage 5 implementation tasks IMP-004–IMP-020 complete.** Stage 6 independent whole-project code review and Stage 7 independent verification remain pending; this entry does not claim either approval. No commit, push, or PR was performed.
