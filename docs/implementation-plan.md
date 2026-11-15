@@ -17,7 +17,7 @@ Status: **APPROVED by the human stakeholder on 2026-11-12 (Stage 4 — Implement
 | `docs/requirements.md` | Stage 1 approved 2026-11-11; clarifications C-1, C-2, C-3 approved 2026-11-12; C-4 (AC-FR-001c) and C-5 (AC-NFR-003) approved 2026-11-12. 10 FR, 9 NFR, 37 acceptance criteria (28 FR + 9 NFR). |
 | `docs/architecture.md` | Revision 2, approved 2026-11-12; Stage 3 corrections DR-001 to DR-004 incorporated (see `docs/changelog.md`, 2026-11-12 rows). |
 | `docs/design-review.md` | Stage 3 targeted re-review verdict PASS; Stage 3 formally approved by the human on 2026-11-12. The corrected review record and architecture status are authoritative; see `docs/changelog.md` entries dated 2026-11-12. Decision D-2 is resolved. |
-| `docs/user-stories.md` | Created 2026-11-12 as a supplementary draft containing US-001 to US-010, mapped one-to-one to FR-001 to FR-010. **DRAFT — awaiting separate human review/approval.** Derived from approved requirements; it does not add or supersede acceptance criteria. |
+| `docs/user-stories.md` | Created 2026-11-12 as a supplementary document containing US-001 to US-010, mapped one-to-one to FR-001 to FR-010; **approved by the human stakeholder on 2026-11-15**. Derived from approved requirements; it does not add or supersede acceptance criteria. |
 | `pom.xml` | Existing and unchanged: groupId `org.capstone`, artifactId `expense-tracker`, 0.1.0-SNAPSHOT, `maven.compiler.release=21`, TestNG 7.11.0 (test), Lombok 1.18.46 (provided, with `annotationProcessorPaths`), compiler plugin 3.13.0, Surefire 3.5.2 (`useModulePath=false`). No `pom.xml` change is planned. |
 
 Base package: `org.capstone.expense` (A-ARCH-01). Source root: `src/main/java/org/capstone/expense/`. Test root: `src/test/java/org/capstone/expense/`. No `src/` tree exists yet.
@@ -565,12 +565,13 @@ No requirements or architecture gap blocks planning. D-1 and D-2 (resolved durin
 |---|---|
 | Task count | 20 (IMP-001 to IMP-020) in 6 milestones |
 | Requirement coverage | FR-001-FR-010, NFR-001-NFR-009, all 37 ACs mapped |
-| User-story coverage | US-001 to US-010 mapped one-to-one to FR-001 to FR-010; draft story document is supplementary and does not add acceptance criteria |
-| User-story approval status | `docs/user-stories.md` remains **DRAFT — awaiting separate human review/approval** |
+| User-story coverage | US-001 to US-010 mapped one-to-one to FR-001 to FR-010; the approved story document is supplementary and does not add acceptance criteria |
+| User-story approval status | `docs/user-stories.md` **APPROVED by the human stakeholder on 2026-11-15**; approved requirements remain authoritative |
 | Stage 3 status | **Approved** by the human on 2026-11-12; corrected design-review and architecture records are reflected in the baseline |
 | Build / tests run by the planner | **None.** No source, test, or `pom.xml` file was created or modified by the planner. Source code created by Java Developer post-planning and approved by human on 2026-11-14. |
 | Human approval of this plan | **APPROVED by the human on 2026-11-12.** Stage 4 — Implementation Planning is approved. All 20 tasks, traceability matrices, and planning decisions are authorized. |
 | Implementation authorized | **AUTHORIZED by the human on 2026-11-14.** Stage 5 — Application Implementation approved. Initial source code (exceptions, models, CategoryTest) reviewed and approved. Implementation work (IMP-001 through IMP-020) may proceed. |
 | Implementation task execution | **IMP-001 through IMP-020 completed on 2026-11-14**; implementation and task-level tests are recorded in `docs/changelog.md`. |
+| Human approval of implementation tasks | **IMP-001 through IMP-020 APPROVED by the human stakeholder on 2026-11-15.** See the dated approval record in `docs/changelog.md`. |
 | Implementation verification evidence | `mvn clean test`: BUILD SUCCESS, 110 tests, 0 failures, 0 errors, 0 skipped. The warning-enabled compile and source-compliance checks also passed; see the dated activity-log entry. |
-| Subsequent approval gates | Stage 6 independent whole-project code review and Stage 7 independent verification remain pending. Stage 5 completion does not approve either stage or authorize a commit, push, or PR. |
+| Subsequent approval gates | Stage 6 independent whole-project code review and Stage 7 independent verification remain pending. Approval of Stage 5 tasks does not approve either stage or authorize a push or PR. |

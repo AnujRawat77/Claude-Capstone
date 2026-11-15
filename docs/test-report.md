@@ -1,139 +1,81 @@
-# Test Report
+# Test Report — Personal Expense Tracker
 
-**Project:** Personal Expense Tracker  
-**Date:** 2026-11-14  
-**Java Version:** Java 21  
-**Build Tool:** Maven  
-**Test Framework:** TestNG 7.11.0  
-**Status:** PARTIAL VERIFICATION — IMPLEMENTATION CHECKPOINT
+**Verification date:** 2026-11-14
+**Runtime:** Java 21
+**Build tool:** Apache Maven
+**Test framework:** TestNG 7.11.0
+**Status:** Implementation-level automated verification completed and Stage 5 tasks IMP-001–IMP-020 approved by the human stakeholder on 2026-11-15; independent Stage 7 verification and approval remain pending.
+**Document review:** Reviewed by the human stakeholder on 2026-11-15. This does not constitute Stage 7 verification or approval.
 
----
+## 1. Scope and Evidence
 
-## 1. Purpose
+This report records the implementation tests and checks actually run after completing IMP-001 through IMP-020. It is not a claim that the independent Stage 7 verification gate has been approved.
 
-This report records the compilation and test execution evidence available at the IMP-003 implementation checkpoint.
+The original IMP-003 checkpoint results are retained in the 2026-11-14 history in `docs/changelog.md`. This report supersedes the earlier checkpoint-only status, which predated implementation of IMP-004 through IMP-020.
 
-The application implementation is incomplete. This report does not represent final application verification or formal Stage 7 independent testing.
+## 2. Test Suite
 
-## 2. Verification Results
+**Command:** `mvn clean test`
+**JDK:** Java 21 (`C:\Program Files\Java\jdk-21.0.12.1`)
+**Result:** **BUILD SUCCESS**
 
-### 2.1 Baseline — IMP-001
+| Result | Count |
+|---|---:|
+| Tests run | 110 |
+| Failures | 0 |
+| Errors | 0 |
+| Skipped | 0 |
 
-**Command:** `mvn test`
+Coverage includes:
 
-**Recorded result:** BUILD SUCCESS.
+- Category enums and category lookup.
+- Transaction validation and immutable update behavior.
+- Transaction and budget stores.
+- Budget validation, overwrite, and the exact-100% alert boundary.
+- Transaction creation, lookup, filtering, editing, deletion, and identifier behavior.
+- Category-spending and balance summaries.
+- Input parsing, date validation, formatting, and error messages.
+- Transaction/report console flows and scripted end-to-end sessions, including EOF and invalid input.
 
-The initial Maven baseline was verified using Java 21. At that point, no application source files or test classes existed.
+The dedicated required edge-case tests include zero and negative amount rejection, missing transaction IDs, reversed date ranges, type changes during editing, budget overwrite, and an alert at exactly 100%.
 
-### 2.2 Category Implementation — IMP-002
+## 3. Compilation and Runtime Smoke Check
 
-**Earlier compilation command:** `mvn clean compile test-compile`
+**Command:** `mvn clean compile -Dmaven.compiler.showWarnings=true`
+**Result:** **BUILD SUCCESS**; 24 production source files compiled for Java release 21; no compiler warnings were reported.
 
-**Recorded result:** BUILD SUCCESS.
+A scripted console smoke check supplied menu option `9` to `org.capstone.expense.Main`. The app displayed the menu once and returned normally with exit status 0.
 
-Production and test sources compiled successfully.
+## 4. Compliance Verification
 
-**Latest runtime test command:**
+**Command:** `powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify.ps1`
+**Result:** **PASS**. The script runs `mvn clean test` and checks:
 
-`mvn -Dtest=CategoryTest test`
+- No prohibited primitive floating-point monetary types in production source.
+- No legacy `Date`/`Calendar` APIs.
+- No persistence, database, or network APIs.
+- No `System.exit`.
+- No GUI or logging-framework imports.
+- No JUnit references in test sources.
+- Lombok usage in the six approved model value classes.
+- Presence of the seven required edge-case test methods.
 
-**Execution result:**
+PowerShell required a process-scoped execution-policy override on the environment used for this run. The verification script itself does not change the machine-wide policy.
 
-- Test class: `org.capstone.expense.model.CategoryTest`
-- Tests run: 19
-- Failures: 0
-- Errors: 0
-- Skipped: 0
-- Build result: BUILD SUCCESS
+## 5. Notices and Limitations
 
-The earlier runtime execution attempt was blocked by a Maven Central DNS/provider download issue. On 2026-11-14, Maven successfully downloaded the required Surefire TestNG provider and executed all 19 tests.
+- TestNG execution emitted SLF4J's missing-provider notice and NOP fallback notice. The notices did not fail the build or tests.
+- These are implementation-level test and compliance results. They do not replace independent Stage 6 code review or Stage 7 verification.
+- No coverage percentage or claim that every acceptance criterion has been independently verified is made in this report.
 
-**IMP-002 test execution: PASS.**
+## 6. Gate Status
 
-A narrow independent code review of IMP-002 was also recorded as PASS with no findings. This was not a whole-project code review.
-
-### 2.3 Exception Implementation — IMP-003
-
-**Latest compilation command:** `mvn clean compile`
-
-**Execution result:**
-
-- Production source files compiled: 7
-- Build result: BUILD SUCCESS
-
-The seven files comprise the five IMP-002 production files and two IMP-003 exception classes.
-
-The approved implementation plan does not require a dedicated test class for IMP-003. Runtime behavior verification is intended to occur through subsequent service and console tests.
-
-**IMP-003 compilation: PASS. Runtime verification: PENDING.**
-
-## 3. Warnings Observed
-
-The latest command output contained the following warnings:
-
-1. Lombok emitted warnings concerning the deprecated `sun.misc.Unsafe.objectFieldOffset` method.
-2. SLF4J reported that no provider was found and that it would use its no-operation logger implementation.
-3. Git reported LF-to-CRLF line-ending conversion warnings during `git diff --stat`.
-
-These warnings did not cause either Maven command to fail.
-
-They are recorded for visibility and should not be represented as test failures.
-
-## 4. Current Implementation and Test Scope
-
-Implementation was intentionally paused after IMP-003.
-
-Completed implementation tasks:
-
-- IMP-001 — Build baseline
-- IMP-002 — Categories and enums
-- IMP-003 — Exception classes
-
-The remaining tasks, IMP-004 through IMP-020, have not been completed.
-
-Consequently, the following are not yet available for complete application verification:
-
-- Transaction and budget storage tests
-- Service-layer tests
-- Console-layer tests
-- End-to-end application tests
-- Full acceptance-criteria verification
-- Mandatory NFR-009 edge-case test inventory
-
-## 5. Git Working Tree Evidence
-
-The supplied `git status --short` output shows modified and untracked project files.
-
-The supplied `git diff --stat` reports:
-
-- 23 tracked files changed
-- 6,281 insertions
-- 122 deletions
-
-The statistic excludes untracked files. Therefore, it does not represent the complete set of files that would be included in a future commit or pull request.
-
-No commit or push is evidenced by the supplied output.
-
-## 6. Overall Verification Status
-
-| Area | Status |
+| Gate | Status |
 |---|---|
-| IMP-001 baseline build | PASS |
-| IMP-002 compilation | PASS |
-| IMP-002 CategoryTest execution | PASS — 19 tests |
-| IMP-002 narrow independent code review | PASS |
-| IMP-003 compilation | PASS |
-| IMP-003 runtime verification | PENDING |
-| Remaining implementation tasks | NOT IMPLEMENTED |
-| Full application test suite | NOT AVAILABLE |
-| Formal Stage 7 verification | NOT PERFORMED |
-
-## 7. Conclusion
-
-The project has successfully demonstrated Maven compilation under Java 21 and execution of the 19 CategoryTest test methods.
-
-The implementation remains an intermediate checkpoint after IMP-003. The results must not be interpreted as evidence that the complete Personal Expense Tracker application has been implemented or verified.
-
-Formal independent verification, complete application testing, and remaining implementation tasks are deferred.
-
-**Report classification:** Partial implementation and test evidence — not a final release test report.
+| Stage 5 implementation tasks IMP-001–IMP-020 | Complete and human-approved on 2026-11-15 |
+| TestNG implementation suite | PASS — 110 tests, no failures/errors/skips |
+| Warning-enabled Java 21 production compilation | PASS |
+| Scripted application startup/exit | PASS |
+| Automated source-compliance checks | PASS |
+| Stage 6 independent whole-project code review | Pending |
+| Stage 7 independent verification and human approval | Pending |

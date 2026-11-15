@@ -20,7 +20,7 @@ The approved technical baseline remains:
 - BigDecimal for monetary values
 - LocalDate for dates
 
-**Baseline status:** DRAFT — awaiting human review and approval  
+**Baseline status:** APPROVED by the human stakeholder on 2026-11-15.
 **Created:** 2026-11-12  
 **Source:** `docs/requirements.md`  
 **Implementation authorization:** Not granted by this document.
@@ -236,10 +236,10 @@ As a user, I want clear console navigation and understandable validation message
 
 ## Human Review and Approval
 
-**Document status:** DRAFT — awaiting human review  
-**Reviewed by:** Pending  
-**Approved by:** Pending  
-**Approval date:** Pending  
+**Document status:** APPROVED
+**Reviewed by:** Human stakeholder
+**Approved by:** Human stakeholder
+**Approval date:** 2026-11-15
 **Implementation authorization:** Not granted
 
 This document becomes an approved supplementary project artifact only after explicit human approval.

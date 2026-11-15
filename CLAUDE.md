@@ -74,9 +74,9 @@ Source of truth: `docs/design-review.md` (Final Status Addendum)
 
 Source of truth: `docs/implementation-plan.md` (20 tasks, 6 milestones, full traceability)
 
-**Stage 5 — Application Implementation: TASKS COMPLETE** (2026-11-14)
+**Stage 5 — Application Implementation: TASKS APPROVED** (2026-11-15)
 
-Source of truth: `src/main/java/org/capstone/expense/`, `src/test/java/org/capstone/expense/`, and `docs/implementation-plan.md` (IMP-001 through IMP-020 implemented; 110 TestNG tests pass; independent Stage 6 review and Stage 7 verification remain pending)
+Source of truth: `src/main/java/org/capstone/expense/`, `src/test/java/org/capstone/expense/`, `docs/implementation-plan.md`, and `docs/changelog.md` (IMP-001 through IMP-020 implemented and approved by the human stakeholder on 2026-11-15; 110 TestNG tests pass; independent Stage 6 review and Stage 7 verification remain pending)
 
 **Next stage: Stage 6 — Independent Code Review.**
 

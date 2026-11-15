@@ -300,7 +300,7 @@ Record stage, agent/skill, input, output, evidence and human approval. This is a
 
   No `pom.xml`, requirements, architecture, or implementation-plan modifications. No application source or test files created. No commit or push.
 - **Evidence:** Verified commands and results recorded above; `docs/changelog.md` appended (this row).
-- **Approval/status:** **IMP-001 — Verify build baseline and create source tree: COMPLETE with JDK 21.** All acceptance criteria satisfied. Ready to proceed to IMP-002.
+- **Approval/status:** **IMP-001 — Verify build baseline and create source tree: APPROVED by the human stakeholder on 2026-11-15.** Implementation evidence and acceptance criteria remain as recorded above.
 
 ---
 
@@ -322,7 +322,7 @@ Record stage, agent/skill, input, output, evidence and human approval. This is a
   - **Acceptance criteria:** All enum values present and correct; order preserved; `transactionType()` returns correct type for each category; case-insensitive lookup fully implemented; no Lombok on enums/interface per spec.
   - **Dependencies satisfied:** IMP-001 (build baseline verified with JDK 21).
 - **Evidence:** Files created in `src/main/java/org/capstone/expense/model/` and `src/test/java/org/capstone/expense/model/`; incorrect files in `org.capstone.model` deleted; `docs/changelog.md` updated (this row). `pom.xml`, requirements, architecture, implementation plan not modified. No commit or push.
-- **Approval/status:** **IMP-002 — Category interface, enums and type enums: IMPLEMENTATION COMPLETE.** Package structure corrected and verified. Source and test compilation successful with zero warnings. Test execution blocked by transient network issue (dependency resolution). Ready for human review.
+- **Approval/status:** **IMP-002 — Category interface, enums and type enums: APPROVED by the human stakeholder on 2026-11-15.** Package structure corrected and verified. Source and test compilation successful with zero warnings. Test execution was initially blocked by a transient network issue; the later integrated suite executed successfully. The narrow independent code review returned PASS.
 
 ---
 
@@ -365,18 +365,185 @@ Record stage, agent/skill, input, output, evidence and human approval. This is a
   - **Independent verification:** Deferred to Stage 7 (Verification and Testing).
   - No source code, tests, requirements, architecture, implementation plan, or other files modified by this entry. No builds, tests, or other agents run.
 - **Evidence:** Compilation result as reported by the human stakeholder and recorded above; `docs/changelog.md` appended (this entry). No commit or push.
-- **Approval/status:** **IMP-003 accepted by human stakeholder.** Ready for IMP-004, subject to separate human authorization.
+- **Approval/status:** **IMP-003 accepted on 2026-11-13 and APPROVED by the human stakeholder on 2026-11-15.**
 
 ---
 
-## 2026-11-14 — Stage 5 — Application Implementation (IMP-004–IMP-020)
+## 2026-11-14 — Stage 5 — Implementation (IMP-004 executed)
 
-- **Agent:** Java Developer (implementation handled in this session)
-- **Output/activity:** Completed the remaining approved implementation-plan scope:
-  - Immutable `Transaction` and Lombok model/value classes; ordered in-memory transaction storage and monthly budget storage.
-  - Budget, transaction, and summary services, including validation, atomic edits, shared non-reused IDs, inclusive date filters, exact monetary arithmetic, and budget alerts at or above the threshold.
-  - Console input parsing, formatting, transaction/report flows, menu dispatch, EOF handling, and `Main` composition root.
-  - TestNG model, storage, service, parser, formatter, console, and end-to-end tests; PowerShell verification script at `scripts/verify.ps1`.
-- **Evidence:** On Java 21, `mvn clean test` completed with **BUILD SUCCESS** (110 tests; 0 failures, 0 errors, 0 skipped). `mvn clean compile -Dmaven.compiler.showWarnings=true` completed with **BUILD SUCCESS** and no compiler warnings. The verification script passed source scans for prohibited monetary/date types, persistence/network/database APIs, `System.exit`, GUI/logging imports, JUnit, Lombok model annotations, and the seven required edge-case test methods. A scripted `9` console smoke run returned normally, displayed the menu once, and exited with status 0.
-- **Known output:** Test execution reports SLF4J's missing-provider notice and NOP fallback; it does not fail tests. PowerShell script execution on this machine required a process-scoped `-ExecutionPolicy Bypass`.
-- **Approval/status:** **Stage 5 implementation tasks IMP-004–IMP-020 complete.** Stage 6 independent whole-project code review and Stage 7 independent verification remain pending; this entry does not claim either approval. No commit, push, or PR was performed.
+- **Agent:** Java Developer
+- **Output/activity:** Implemented the immutable `Transaction` model with constructor invariants and builder-based edits; added `TransactionTest`.
+- **Evidence:** Included in the integrated Java 21 TestNG run recorded under IMP-019.
+- **Approval/status:** Implementation task complete; **stakeholder-approved 2026-11-15** (see the human approval entry below). Independent review is not implied.
+
+---
+
+## 2026-11-14 — Stage 5 — Implementation (IMP-005 executed)
+
+- **Agent:** Java Developer
+- **Output/activity:** Added Lombok value classes for budget keys, summaries, alerts, and transaction results.
+- **Evidence:** The six approved model value classes were checked by the compliance script recorded under IMP-018; integrated compilation and tests are recorded under IMP-019.
+- **Approval/status:** Implementation task complete; **stakeholder-approved 2026-11-15** (see the human approval entry below). Independent review is not implied.
+
+---
+
+## 2026-11-14 — Stage 5 — Implementation (IMP-006 executed)
+
+- **Agent:** Java Developer
+- **Output/activity:** Implemented ordered in-memory transaction storage, monotonic ID allocation, replacement, removal, and read-only list results; added `TransactionStoreTest`.
+- **Evidence:** `TransactionStoreTest` was included in the integrated TestNG run recorded under IMP-019.
+- **Approval/status:** Implementation task complete; **stakeholder-approved 2026-11-15** (see the human approval entry below). Independent review is not implied.
+
+---
+
+## 2026-11-14 — Stage 5 — Implementation (IMP-007 executed)
+
+- **Agent:** Java Developer
+- **Output/activity:** Implemented in-memory monthly budget storage with overwrite behavior; added `BudgetStoreTest`.
+- **Evidence:** `BudgetStoreTest` was included in the integrated TestNG run recorded under IMP-019.
+- **Approval/status:** Implementation task complete; **stakeholder-approved 2026-11-15** (see the human approval entry below). Independent review is not implied.
+
+---
+
+## 2026-11-14 — Stage 5 — Implementation (IMP-008 executed)
+
+- **Agent:** Java Developer
+- **Output/activity:** Implemented budget validation, retrieval/upsert, monthly spend aggregation, and threshold alert evaluation; added `BudgetServiceTest`.
+- **Evidence:** `BudgetServiceTest`, including the exact-100% threshold test, was included in the integrated TestNG run recorded under IMP-019.
+- **Approval/status:** Implementation task complete; **stakeholder-approved 2026-11-15** (see the human approval entry below). Independent review is not implied.
+
+---
+
+## 2026-11-14 — Stage 5 — Implementation (IMP-009 executed)
+
+- **Agent:** Java Developer
+- **Output/activity:** Implemented expense/income creation, shared identifiers, lookup, category filtering, and inclusive date-range filtering; added service tests.
+- **Evidence:** `TransactionServiceTest` was included in the integrated TestNG run recorded under IMP-019.
+- **Approval/status:** Implementation task complete; **stakeholder-approved 2026-11-15** (see the human approval entry below). Independent review is not implied.
+
+---
+
+## 2026-11-14 — Stage 5 — Implementation (IMP-010 executed)
+
+- **Agent:** Java Developer
+- **Output/activity:** Implemented atomic transaction editing, type/category compatibility, confirmation-aware deletion, and alert reevaluation; expanded service tests.
+- **Evidence:** `TransactionServiceTest`, including edit type change, deletion, and invalid ID cases, was included in the integrated TestNG run recorded under IMP-019.
+- **Approval/status:** Implementation task complete; **stakeholder-approved 2026-11-15** (see the human approval entry below). Independent review is not implied.
+
+---
+
+## 2026-11-14 — Stage 5 — Implementation (IMP-011 executed)
+
+- **Agent:** Java Developer
+- **Output/activity:** Implemented category-spending percentages and income/expense/net summaries; added `SummaryServiceTest` for rounding, sorting, empty results, and balances.
+- **Evidence:** `SummaryServiceTest` was included in the integrated TestNG run recorded under IMP-019.
+- **Approval/status:** Implementation task complete; **stakeholder-approved 2026-11-15** (see the human approval entry below). Independent review is not implied.
+
+---
+
+## 2026-11-14 — Stage 5 — Implementation (IMP-012 executed)
+
+- **Agent:** Java Developer
+- **Output/activity:** Implemented stable two-decimal monetary and percentage formatting, transaction rows, and budget warning text; added `ConsoleFormatterTest`.
+- **Evidence:** `ConsoleFormatterTest` was included in the integrated TestNG run recorded under IMP-019.
+- **Approval/status:** Implementation task complete; **stakeholder-approved 2026-11-15** (see the human approval entry below). Independent review is not implied.
+
+---
+
+## 2026-11-14 — Stage 5 — Implementation (IMP-013 executed)
+
+- **Agent:** Java Developer
+- **Output/activity:** Implemented console input parsing and validation for amounts, dates, menu choices, categories, and confirmations; added fixed-clock and EOF tests.
+- **Evidence:** `InputReaderTest` was included in the integrated TestNG run recorded under IMP-019.
+- **Approval/status:** Implementation task complete; **stakeholder-approved 2026-11-15** (see the human approval entry below). Independent review is not implied.
+
+---
+
+## 2026-11-14 — Stage 5 — Implementation (IMP-014 executed)
+
+- **Agent:** Java Developer
+- **Output/activity:** Implemented transaction add, list, edit, and delete console flows, including budget alert output; added `TransactionConsoleTest`.
+- **Evidence:** `TransactionConsoleTest` was included in the integrated TestNG run recorded under IMP-019.
+- **Approval/status:** Implementation task complete; **stakeholder-approved 2026-11-15** (see the human approval entry below). Independent review is not implied.
+
+---
+
+## 2026-11-14 — Stage 5 — Implementation (IMP-015 executed)
+
+- **Agent:** Java Developer
+- **Output/activity:** Implemented spending and balance report flows and monthly budget setup/overwrite; added `ReportConsoleTest`.
+- **Evidence:** `ReportConsoleTest` was included in the integrated TestNG run recorded under IMP-019.
+- **Approval/status:** Implementation task complete; **stakeholder-approved 2026-11-15** (see the human approval entry below). Independent review is not implied.
+
+---
+
+## 2026-11-14 — Stage 5 — Implementation (IMP-016 executed)
+
+- **Agent:** Java Developer
+- **Output/activity:** Implemented the console menu loop, operation dispatch, recoverable validation errors, unexpected-error handling, and clean EOF exit; added `ConsoleAppTest`.
+- **Evidence:** `ConsoleAppTest` was included in the integrated TestNG run recorded under IMP-019.
+- **Approval/status:** Implementation task complete; **stakeholder-approved 2026-11-15** (see the human approval entry below). Independent review is not implied.
+
+---
+
+## 2026-11-14 — Stage 5 — Implementation (IMP-017 executed)
+
+- **Agent:** Java Developer
+- **Output/activity:** Added the `Main` composition root and scripted end-to-end scenarios for add/list/delete, budget alerts, transaction type changes, invalid menu input, and EOF handling.
+- **Evidence:** Integrated console scenarios were included in the TestNG run recorded under IMP-019. A scripted menu exit displayed the menu once and returned with status 0.
+- **Approval/status:** Implementation task complete; **stakeholder-approved 2026-11-15** (see the human approval entry below). Independent review is not implied.
+
+---
+
+## 2026-11-14 — Stage 5 — Implementation (IMP-018 executed)
+
+- **Agent:** Java Developer
+- **Output/activity:** Added `scripts/verify.ps1` to run the test suite and the planned source-compliance and required-edge-test checks.
+- **Evidence:** The script ran successfully; all listed scans and required edge-case method checks passed.
+- **Approval/status:** Implementation/check task complete; **stakeholder-approved 2026-11-15** (see the human approval entry below). Independent Stage 7 verification remains pending.
+
+---
+
+## 2026-11-14 — Stage 5 — Implementation (IMP-019 executed)
+
+- **Agent:** Java Developer
+- **Output/activity:** Ran integrated build, test, source-compliance, and application smoke checks.
+- **Evidence:** On Java 21, `mvn clean test` completed with **BUILD SUCCESS** (110 tests; 0 failures, 0 errors, 0 skipped). `mvn clean compile -Dmaven.compiler.showWarnings=true` completed with **BUILD SUCCESS** and no compiler warnings. The verification script passed. A scripted `9` console smoke run displayed the menu once and exited with status 0.
+- **Known output:** TestNG reported SLF4J's missing-provider/NOP fallback notice; it did not fail the build. PowerShell required a process-scoped `-ExecutionPolicy Bypass`.
+- **Approval/status:** Implementation verification task complete; **stakeholder-approved 2026-11-15** (see the human approval entry below). Independent Stage 7 verification remains pending.
+
+---
+
+## 2026-11-14 — Stage 5 — Implementation (IMP-020 executed)
+
+- **Agent:** Java Developer
+- **Output/activity:** Updated implementation and release documentation, including the implementation plan status, README, root changelog, test report, reviewer checklist, code-review status, and SDLC activity log.
+- **Evidence:** Documentation records IMP-001–IMP-020 implementation, actual integrated verification results, and pending Stage 6/Stage 7 approval gates.
+- **Approval/status:** Documentation task complete; **stakeholder-approved 2026-11-15** (see the human approval entry below). Independent review is not implied.
+
+---
+
+## 2026-11-15 — Documentation Update — Implementation Records
+
+- **Agent:** Java Developer
+- **Output/activity:** Updated `docs/code-review.md`, `docs/reviewer-checklist.md`, and `docs/test-report.md` to reflect the completed implementation and recorded evidence. Reorganized the IMP-004–IMP-020 activity into individual dated changelog entries.
+- **Evidence:** `git diff --check` passed. No source code or test files changed in this documentation update.
+- **Approval/status:** Documentation update complete. Whole-project Stage 6 code review and independent Stage 7 verification remain pending.
+
+---
+
+## 2026-11-15 — Stage 5 — Human Approval of Implementation Tasks (IMP-001–IMP-020)
+
+- **Agent:** Human stakeholder
+- **Output/activity:** The stakeholder explicitly approved all implementation-plan tasks IMP-001 through IMP-020, including the implementation and associated task-level deliverables recorded in the entries above.
+- **Approved task IDs:** IMP-001, IMP-002, IMP-003, IMP-004, IMP-005, IMP-006, IMP-007, IMP-008, IMP-009, IMP-010, IMP-011, IMP-012, IMP-013, IMP-014, IMP-015, IMP-016, IMP-017, IMP-018, IMP-019, and IMP-020.
+- **Approval/status:** **All Stage 5 implementation tasks IMP-001–IMP-020: APPROVED by the human stakeholder on 2026-11-15.** This approval is limited to the implementation tasks; it does not constitute Stage 6 independent code review approval or Stage 7 independent verification approval. Those gates remain pending.
+
+---
+
+## 2026-11-15 — Human Review of Project Documentation
+
+- **Agent:** Human stakeholder
+- **Output/activity:** The stakeholder confirmed review of all ten documents under `docs/`. Existing approvals for requirements, architecture, design review, implementation planning, and Stage 5 tasks remain in force. The supplementary user-story baseline was approved on this date.
+- **Document status notes:** `docs/code-review.md` and `docs/test-report.md` were reviewed as status/evidence documents; this does not approve the pending independent Stage 6 or Stage 7 gates. `docs/pr-description.md` was reviewed and identified as stale because it still describes the project as stopped after IMP-003; it is not approved for PR use and must be refreshed during Stage 8.
+- **Approval/status:** **Documentation review complete on 2026-11-15.** User stories are approved as supplementary to, and not superseding, the requirements baseline. Stage 6 independent whole-project review, Stage 7 independent verification, and Stage 8 PR preparation remain pending.
