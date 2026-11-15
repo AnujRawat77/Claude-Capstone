@@ -1,6 +1,7 @@
 package org.capstone.expense.model;
 
 import java.util.Optional;
+import java.util.Locale;
 
 /**
  * Common interface for expense and income category enums.
@@ -33,7 +34,7 @@ public interface Category {
 		if (name == null) {
 			return Optional.empty();
 		}
-		String trimmed = name.trim().toUpperCase();
+		String trimmed = name.trim().toUpperCase(Locale.ROOT);
 		// Search ExpenseCategory first
 		for (ExpenseCategory ec : ExpenseCategory.values()) {
 			if (ec.name().equals(trimmed)) {

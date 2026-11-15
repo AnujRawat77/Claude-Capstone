@@ -74,9 +74,13 @@ Source of truth: `docs/design-review.md` (Final Status Addendum)
 
 Source of truth: `docs/implementation-plan.md` (20 tasks, 6 milestones, full traceability)
 
-**Next stage: Stage 5 — Application Implementation.**
+**Stage 5 — Application Implementation: TASKS APPROVED** (2026-11-15)
 
-Do not begin code changes (Stage 5) until the stakeholder explicitly authorizes application implementation.
+Source of truth: `src/main/java/org/capstone/expense/`, `src/test/java/org/capstone/expense/`, `docs/implementation-plan.md`, and `docs/changelog.md` (IMP-001 through IMP-020 implemented and approved by the human stakeholder on 2026-11-15; 110 TestNG tests pass; independent Stage 6 review and Stage 7 verification remain pending)
+
+**Next stage: Stage 6 — Independent Code Review.**
+
+Stage 5 task completion is not approval of Stage 6 or Stage 7. Commits require explicit human approval per §9, §10.
 
 ## 5. Agent Collaboration
 
